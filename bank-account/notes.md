@@ -1,5 +1,3 @@
-# Bank Account - Java Revision Notes
-
 ## Concepts Learned
 
 ### 1. Classes and Objects
@@ -55,7 +53,7 @@ You write        →  javac compiles  →  java runs
 - Order of checks matters (check negative before checking balance)
 - Handle edge cases: negative amounts, zero, insufficient balance, negative initial balance
 
-## Common Mistakes I Made
+## Lessons Learned from this Project
 - Updating `amount` instead of `balance` in deposit/withdraw
 - Putting code outside `main` method
 - Forgetting quotes around String values
