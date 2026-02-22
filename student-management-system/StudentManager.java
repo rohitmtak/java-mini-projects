@@ -1,65 +1,63 @@
 import java.util.ArrayList;
 
-public class StudentManager {
-    private ArrayList<Student> students;
+// StudentManager class to manage the list of students
+// Logic class - only contains logic
+
+class StudentManager {
+    private ArrayList<Student> students; // list of students
+    private int nextId = 1;  // simple counter to assign the next id when adding a student
 
     // Constructor
     public StudentManager() {
         students = new ArrayList<>();
     }
 
-    // Method (behaviour)
-    // 1. Add new student
-    public void addStudent(Student student) {
-        students.add(student);
-        System.out.println("\nStudent added successfully");
-    } 
+    // Add student (assign the id here, so Student class stays simple)
+    public void addStudent(String name, int age, int standard) {
+        students.add(new Student(nextId++, name, age, standard));
+    }
 
-    // 2. Display all students
-    public void displayAllStudents() {
+    // View all students
+    public void viewAllStudents() {
         if (students.isEmpty()) {
-            System.out.println("\nNo student to display");
+            System.out.println("No students found");
         } else {
-
-            for (int i = 0; i < students.size(); i++) {
-                Student s = students.get(i);
-                s.displayStudentInfo();
+            for (Student student : students) {
+                System.out.println(student);
             }
         }
     }
 
-    // 3. Update new student
-    public void updateStudent(int id, String newName, int newAge, int newStandard) {
+    // Update student
+    public boolean updateStudent(int id, String newName, int newAge, int newStandard) {
         Student student = searchStudent(id);
         if (student != null) {
             student.setName(newName);
             student.setAge(newAge);
             student.setStandard(newStandard);
-            System.out.println("\nStudent updated successfully");
-        } else {
-            System.out.println("\nStudent not found");
+            return true;
         }
+        return false;
     }
 
-    // Find student by their ID
+    // Search student
     public Student searchStudent(int id) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId() == id) {
-                return students.get(i);
-            } 
-        }
-        return null;
-    }
-
-    // Remove student by their Id
-    public void removeStudent(int id) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId() == id) {
-                students.remove(i);
-                System.out.println("\nStudent removed successfully");
-                return;
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student; 
             }
         }
-        System.out.println("\nStudent not found");
+        return null; 
+    }
+
+    // Remove student
+    public boolean removeStudent(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                students.remove(student);
+                return true;
+            }
+        }
+        return false;
     }
 }
