@@ -1,4 +1,4 @@
-## OOP Concepts in This Project
+## OOP in this project
 
 | OOP Concept | How we use it in this project |
 |-------------|------------------------------|
@@ -10,9 +10,8 @@
 
 We do **not** use inheritance or polymorphism in this small project; the focus is on encapsulation, classes/objects, and separation of concerns.
 
----
 
-## Concepts Learned
+## In depth
 
 ### 1. ArrayList (Collections)
 - `ArrayList<Student>` is a growable list — unlike arrays, it can expand and shrink
@@ -27,7 +26,6 @@ We do **not** use inheritance or polymorphism in this small project; the focus i
   | `.isEmpty()` | Returns true if list is empty |
 - In this project we use: `.add()`, `.isEmpty()`, and `.remove(student)` (by object). We do **not** use `.get(i)` or `.size()` because we iterate with the enhanced for-loop (see §4).
 
----
 
 ### 2. Use of nextId
 - `nextId` is an **instance field** in `StudentManager` (not in `Student`): `private int nextId = 1;`
@@ -37,7 +35,6 @@ We do **not** use inheritance or polymorphism in this small project; the focus i
   - First student gets ID 1, second gets 2, and so on
 - Keeping ID assignment in `StudentManager` (and not in `Student`) keeps the `Student` class simple: it only holds data and validates it; the manager decides the ID
 
----
 
 ### 3. Separation of Concerns
 - Split responsibilities across classes instead of putting everything in one file
@@ -48,7 +45,6 @@ We do **not** use inheritance or polymorphism in this small project; the focus i
   | `StudentManagement.java` | UI — menu, Scanner, user interaction |
 - Manager doesn't know about Scanner. Main class doesn't manage the list directly.
 
----
 
 ### 4. Looping Through the Student List
 
@@ -62,7 +58,6 @@ We use the **enhanced for-loop** to go through `students`: `for (Student student
 
 “Not found” is always handled *after* the loop (or in the UI), never inside the loop on every iteration.
 
----
 
 ### 5. Menu-Driven Program
 - `while (running)` keeps the program running until user picks Exit (option 6 sets `running = false`)
@@ -70,7 +65,6 @@ We use the **enhanced for-loop** to go through `students`: `for (Student student
 - `Scanner` reads user input: `nextInt()` for numbers, `nextLine()` for text
 - **Important:** After `nextInt()` we call `scanner.nextLine()` to clear the newline left in the buffer; otherwise the next `nextLine()` may read an empty line
 
----
 
 ### 6. Role of Getters and Setters
 
@@ -78,21 +72,18 @@ We use the **enhanced for-loop** to go through `students`: `for (Student student
 - **Setters** — Assign a new value to a private field (`setName()`, `setAge()`). Let other classes *change* data in a controlled way: we validate inside (e.g. age 5–18) and throw if invalid.
 - **Why both?** Encapsulation: hide fields, expose only what we want. We can validate, change internals later, or omit a setter (e.g. no `setId()` — ID never changes after creation).
 
----
 
 ### 7. Throwing Exceptions
 - `throw new IllegalArgumentException("message")` — stops execution with an error
 - More professional than just printing an error message
 - Used in constructor and setters for validation: name (non-empty), age (5–18), standard (1–12)
 
----
 
 ### 8. "Not Found" Logic in Loops
 - Print "not found" AFTER the loop, not inside an else on each iteration
 - Inside the loop: only check for matches, use `return` to exit early when found
 - If the loop finishes without returning, the item wasn't found
 
----
 
 ### 9. Override (@Override)
 
@@ -100,7 +91,6 @@ We use the **enhanced for-loop** to go through `students`: `for (Student student
 - **Why:** So `System.out.println(student)` prints something readable (ID, name, age, standard) instead of the default.
 - **@Override:** Put it above the method so the compiler checks we really are overriding; it errors if we misspell the method or change the signature.
 
----
 
 ## Lessons Learned from this Project
 
@@ -118,7 +108,6 @@ New one to watch for future projects:
 
 - Not handling invalid input: if the user types non-numeric text where a number is expected (choice, age, ID, standard), `scanner.nextInt()` throws `InputMismatchException` and the program crashes. Fix: use try-catch or `hasNextInt()` and re-prompt.
 
----
 
 ## How to Run
 ```bash
